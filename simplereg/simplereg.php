@@ -77,7 +77,10 @@ class PlgSystemSimpleReg extends JPlugin
 
 			$credentials = array('username'=>$user->username,'password'=> 'BLANK', 'password_clear'=>$result->password);
 		 	$options     = array('user_id'=>$user->get('id'),'type'=>'simplereg', 'autoregister'=>false, 'user_record'=>$result);
-
+			
+		 	//add authentication plugin, so that we need not to create a different plugin for that 
+		 	simpleregHelper::setplugin();
+		 	
 			$app = JFactory::getApplication();
 		 	$app->login($credentials,$options);
 	}
@@ -190,5 +193,28 @@ class PlgSystemSimpleReg extends JPlugin
 									   ->setSubject("Test simple registration")
 									   ->setBody($data['activate'])
 									   ->Send();
+	}
+}
+
+class plgAuthenticationAutoLogin extends JPlugin
+{
+	public function onUserAuthenticate($credentials, $options, $response)
+	{
+		if(isset($options['type']) && $options['type'] == 'simplereg'){
+			self::_setResponse($options, $response);
+			$response->status 	= JAuthentication::STATUS_SUCCESS;
+		}
+	}
+
+	protected static function _setResponse($options, &$response)
+	{
+		$user = JUser::getInstance($options['user_id']); // Bring this in line with the rest of the system
+		$response->email 			= $user->email;
+		$response->fullname 	= $user->name;
+		$response->username 	= $user->username;
+		$response->language 	= $user->getParam('language');
+		$response->error_message = '';
+		//fix for j35
+		$response->type		= 'autologin';
 	}
 }

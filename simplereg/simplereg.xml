@@ -10,7 +10,8 @@
 	<version>1.0</version>
 	<description></description>
 	<files>
-		<filename plugin="simplereg">simplereg.php			</filename>
+		<filename plugin="simplereg">simplereg.php</filename>
+		<filename pluign="simplereg">helper.php</filename>
 	</files>
 
 </extension>
