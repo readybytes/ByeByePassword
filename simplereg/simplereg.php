@@ -100,7 +100,7 @@ class PlgSystemSimpleReg extends JPlugin
 
 		if($valid){
 			$db	   = JFactory::getDBO();
-			$query     = "SELECT * FROM #__users where `username`=".$db->Quote($email);
+			$query     = "SELECT * FROM #__users where `email`=".$db->Quote($email);
 			$result    = $db->setQuery($query)->loadObject();
 
 			if(isset($result->id)){
