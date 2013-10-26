@@ -1,22 +1,18 @@
 <?php
 /**
- * @package     Joomla.Site
- * @subpackage  mod_simpleReg
- *
- * @copyright   Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- */
+* @package Joomla Module for byebye password
+* @copyright Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+* @license GNU General Public License version 2 or later; see LICENSE
+* @author Rimjhim
+*/
 
 defined('_JEXEC') or die;
 
 /**
- * Helper for mod_login
- *
- * @package     Joomla.Site
- * @subpackage  mod_simpleReg
- * @since 		3.0
+ * Helper for mod_byebyepassword
  */
-class ModSimpleregHelper
+
+class ModByeByePasswordHelper
 {
 	public static function getReturnURL($params, $type)
 	{

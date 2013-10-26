@@ -1,23 +1,21 @@
 <?php
 /**
- * @package     Joomla.Site
- * @subpackage  mod_simpleReg
- *
- * @copyright   Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- */
+* @package Joomla Module for byebye password
+* @copyright Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+* @license GNU General Public License version 2 or later; see LICENSE
+*
+* @author Rimjhim
+*/
 
 defined('_JEXEC') or die;
 
 JHtml::_('behavior.keepalive');
 ?>
 <form action="<?php echo JRoute::_('index.php'); ?>" method="post" id="login-form" class="form-vertical">
-<?php if ($params->get('greeting')) : ?>
 	<div class="login-greeting">
 	<?php 
 		echo "Hi ".$user->get('username');?>
 	</div>
-<?php  endif; ?>
 	<div class="logout-button">
 		<input type="submit" name="Submit" class="btn btn-primary" value="<?php echo JText::_('JLOGOUT'); ?>" />
 		<input type="hidden" name="option" value="com_users" />
