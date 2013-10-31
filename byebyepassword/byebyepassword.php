@@ -22,13 +22,14 @@ class PlgSystemByeByePassword extends JPlugin
 
 	public function onAfterRoute()
 	{
-		//do nothing, if someone is logged-in
+		$option = JRequest::getVar('option');
+		
 		//do nothing, if someone is logged-in
 		if(Jfactory::getUser()->id && $option == 'plg_bbpass'){
 			return Jfactory::getApplication()->redirect(base64_decode(JRequest::getVar('return')));
 		}
 		
-		$option = JRequest::getVar('option');
+		
 		$action = JRequest::getVar('action');
 		
 		if($option != 'plg_bbpass'){
@@ -81,7 +82,7 @@ class PlgSystemByeByePassword extends JPlugin
 			$result      = $db->setQuery($query)->loadObject();
 
 			$credentials = array('username'=>$user->username,'password'=> 'BLANK', 'password_clear'=>$result->password);
-		 	$options     = array('user_id'=>$user->get('id'),'type'=>'easyautologin', 'autoregister'=>false, 'user_record'=>$result);
+		 	$options     = array('user_id'=>$user->get('id'),'type'=>'bbpautologin', 'autoregister'=>false, 'user_record'=>$result);
 			
 		 	//add authentication plugin, so that we need not to create a different plugin for that 
 		 	byebyepasswordHelper::setplugin();
