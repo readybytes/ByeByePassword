@@ -178,10 +178,23 @@ class PlgSystemByeByePassword extends JPlugin
 		//create hash containing userid and token
 		$hash = base64_encode($user->id.";".$token);
 		
-		//$user->set('activation',$token);
-		$user->setParam('generationTime',$timestamp);
-		$user->setParam('userToken',$token);
-		$user->save();
+		// TODO : Remove it, This checking is only required for admin users in j25
+		// as admin data can't be modifed directly
+		$version = new JVersion();
+		if($user->authorise('core.admin') && $version->RELEASE == '2.5'){
+			$params    = json_decode($user->getparameters()->toString());
+			$params->generationTime = $timestamp;
+			$params->userToken      = $token;
+			$newParams = json_encode($params);
+			$db        = JFactory::getDbo();
+			$query     = "update `#__users` set `params`='".$newParams."' where `id`=".$user->id; 
+			$db->setQuery($query)->query();
+		}
+		else{
+			$user->setParam('generationTime',$timestamp);
+			$user->setParam('userToken',$token);
+			$user->save();
+		}
 
 		$config  = JFactory::getConfig();
 		$data    = $user->getProperties();

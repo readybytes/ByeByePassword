@@ -7,6 +7,9 @@
 * @author Rimjhim
 */
 
+defined('_JEXEC') or die;
+
+
  class byebyepasswordHelper extends JPluginHelper
  {
  	function setPlugin()
