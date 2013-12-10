@@ -26,7 +26,7 @@ class PlgSystemByeByePassword extends JPlugin
 		
 		//do nothing, if someone is logged-in
 		if(Jfactory::getUser()->id && $option == 'plg_bbpass'){
-			return Jfactory::getApplication()->redirect(base64_decode(JRequest::getVar('return')));
+			return Jfactory::getApplication()->redirect(JRoute::_(base64_decode(JRequest::getVar('return'))));
 		}
 		
 		
@@ -47,7 +47,7 @@ class PlgSystemByeByePassword extends JPlugin
 			$this->verifyLogin();
 		}
 		
-		Jfactory::getApplication()->redirect(base64_decode(JRequest::getVar('return')));
+		Jfactory::getApplication()->redirect(JRoute::_(base64_decode(JRequest::getVar('return'))));
 	}
 
 	function verifyLogin()
@@ -121,7 +121,8 @@ class PlgSystemByeByePassword extends JPlugin
 			}
 		}
 		
-		JFactory::getApplication()->enqueueMessage($msg);
+		//return to current url
+		return JFactory::getApplication()->redirect(JRoute::_(base64_decode(JRequest::getVar('currentUrl'))),$msg);
       }
    	
    	function registerUser($email)

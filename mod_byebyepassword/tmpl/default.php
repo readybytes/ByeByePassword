@@ -9,7 +9,7 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 ?>
-<form id="login-register" method="post" action="index.php?option=plg_bbpass&action=loginregister&return=<?php echo base64_encode(Juri::getInstance()->toString()); ?>">
+<form id="login-register" method="post" action="index.php?option=plg_bbpass&action=loginregister&currentUrl=<?php echo base64_encode(Juri::getInstance()->toString());?>&return=<?php echo $return; ?>">
 
             <input type="email" placeholder="your@email.com" name="email" autofocus class="input-medium"/>
             <p><?php echo JText::_("MOD_BBPASS_LOGIN_LINK_HELP");?></p>
