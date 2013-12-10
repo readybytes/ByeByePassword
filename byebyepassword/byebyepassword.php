@@ -179,10 +179,9 @@ class PlgSystemByeByePassword extends JPlugin
 		//create hash containing userid and token
 		$hash = base64_encode($user->id.";".$token);
 		
-		// TODO : Remove it, This checking is only required for admin users in j25
-		// as admin data can't be modifed directly
-		$version = new JVersion();
-		if($user->authorise('core.admin') && $version->RELEASE == '2.5'){
+		// This checking is required for super users
+		// as joomla doesn't allow to modify data of super users,directly
+		if($user->authorise('core.admin')){
 			$params    = json_decode($user->getparameters()->toString());
 			$params->generationTime = $timestamp;
 			$params->userToken      = $token;
