@@ -22,15 +22,15 @@ class PlgSystemByeByePassword extends JPlugin
 
 	public function onAfterRoute()
 	{
-		$option = JRequest::getVar('option');
+		$option = Jfactory::getApplication()->input->get('option');
 		
 		//do nothing, if someone is logged-in
 		if(Jfactory::getUser()->id && $option == 'plg_bbpass'){
-			return Jfactory::getApplication()->redirect(JRoute::_(base64_decode(JRequest::getVar('return'))));
+			return Jfactory::getApplication()->redirect(JRoute::_(base64_decode(Jfactory::getApplication()->input->get('return'))));
 		}
 		
 		
-		$action = JRequest::getVar('action');
+		$action = Jfactory::getApplication()->input->get('action');
 		
 		if($option != 'plg_bbpass'){
 			return true;		
@@ -47,12 +47,12 @@ class PlgSystemByeByePassword extends JPlugin
 			$this->verifyLogin();
 		}
 		
-		Jfactory::getApplication()->redirect(JRoute::_(base64_decode(JRequest::getVar('return'))));
+		Jfactory::getApplication()->redirect(JRoute::_(base64_decode(Jfactory::getApplication()->input->get('return'))));
 	}
 
 	function verifyLogin()
 	{
-		$hash = JRequest::getVar('hash');
+		$hash = Jfactory::getApplication()->input->get('hash');
 		
 		//this data contains userid + token
 		$data = explode(';', base64_decode($hash));
@@ -93,7 +93,7 @@ class PlgSystemByeByePassword extends JPlugin
 
    function loginregister()
    {
-	   	$email = JRequest::getVar('email');
+	   	$email = Jfactory::getApplication()->input->get('email');
 	   	$msg   = '';
 		$valid = true;
 		
@@ -122,7 +122,7 @@ class PlgSystemByeByePassword extends JPlugin
 		}
 		
 		//return to current url
-		return JFactory::getApplication()->redirect(JRoute::_(base64_decode(JRequest::getVar('currentUrl'))),$msg);
+		return JFactory::getApplication()->redirect(JRoute::_(base64_decode(Jfactory::getApplication()->input->get('currentUrl'))),$msg);
       }
    	
    	function registerUser($email)
@@ -204,7 +204,7 @@ class PlgSystemByeByePassword extends JPlugin
 		$data['siteurl']	= JUri::base();
 		
 		//get return url
-		$returnUrl = JRequest::getVar('return',base64_encode('index.php'));
+		$returnUrl = Jfactory::getApplication()->input->get('return',base64_encode('index.php'));
 		
 		
 		
