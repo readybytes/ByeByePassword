@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 
  class byebyepasswordHelper extends JPluginHelper
  {
- 	function setPlugin()
+ 	static function setPlugin()
  	{
  		$obj = new stdClass();
  		$obj->type = 'authentication';
