@@ -17,7 +17,7 @@ class PlgSystemByeByePassword extends JPlugin
 	public function __construct(&$subject, $config)
 	{
 		parent::__construct($subject, $config);
-		$this->loadLanguage();
+		JFactory::getLanguage()->load('plg_system_byebyepassword', __DIR__);
 	}
 
 	public function onAfterRoute()
